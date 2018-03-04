@@ -1,0 +1,58 @@
+--- 
+title: Home 
+layout: home 
+---
+
+<section id="filter-section">
+    <h1>Isotope - filtering &amp; sorting</h1>
+    <h2>Filter</h2>
+    <div id="filters" class="button-group">
+        <button class="button is-checked" data-filter="*">show all</button>
+        <button class="button" data-filter="numberGreaterThan50">number > 50</button>
+        <select name="category" id="category-filter" class="filter-select">
+            <option selected value="categoryFilterAll">Show all</option>
+            <option value="categoryFilterAero">Aero</option>
+            <option value="categoryFilterControl">Control</option>
+            <option value="categoryFilterPropulsion">Propulsion</option>
+            <option value="categoryFilterPayload">Payload</option>
+            <option value="categoryFilterThermal">Thermal</option>
+            <option value="categoryFilterPods">Pods</option>
+            <option value="categoryFilterUtility">Utility</option>
+            <option value="categoryFilterFuelTank">FuelTank</option>
+            <option value="categoryFilterStructural">Structural</option>
+            <option value="categoryFilterElectrical">Electrical</option>
+            <option value="categoryFilterEngine">Engine</option>
+            <option value="categoryFilterScience">Science</option>
+            <option value="categoryFilterCommunication">Communication</option>
+            <option value="categoryFilternone">None</option>
+            <option value="categoryFilterCoupling">Coupling</option>
+            <option value="categoryFilterGround">Ground</option>
+        </select>
+        <select name="category" id="category-filter" class="filter-select">
+            <option selected value="crossfeedAll">Show all</option>
+            <option value="crossfeedEnabled">Enabled</option>
+            <option value="crossfeedDisabled">Disabled</option>
+        </select>
+    </div>
+    <h2>Sort</h2>
+    <div id="sorts" class="button-group">
+        <button class="button is-checked" data-sort-by="original-order">original order</button>
+        <button class="button" data-sort-by="title">title</button>
+        <button class="button" data-sort-by="author">author</button>
+        <button class="button" data-sort-by="entrycost">entrycost</button>
+        <button class="button" data-sort-by="cost">cost</button>
+        <button class="button" data-sort-by="manufacturer">manufacturer</button>
+        <button class="button" data-sort-by="mass">mass</button>
+        <button class="button" data-sort-by="explosionpotential">explosionpotential</button>
+        <button class="button" data-sort-by="category">category</button>
+    </div>
+    <select name="order" id="sort-order" class="sort-order">
+        <option selected value="ASC">Ascending</option>
+        <option value="DESC">Descending</option>
+    </select>
+    <div class="parts-grid-container">
+        <div class="parts-grid"></div>
+    </div>
+</section>
+
+
