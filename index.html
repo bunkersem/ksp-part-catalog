@@ -13,8 +13,6 @@ layout: home
                     </legend>
                     <hr>
                     <div id="filters" class="button-group form-inline">
-                        <button class="filter-control btn btn-default button is-checked" data-filter="*">show all</button>
-                        <button class="filter-control btn btn-default button" data-filter="numberGreaterThan50">number > 50</button>
                         <select name="category" id="category-filter" class="filter-control filter-select form-control">
                             <option selected value="categoryFilterAll">Show all</option>
                             <option value="categoryFilterAero">Aero</option>
@@ -49,25 +47,25 @@ layout: home
                     <hr>
                     <div id="sorts" class="button-group form-inline">
                         <label class="sr-only" for="sort-original-order">Original order</label>
-                        <button type="button" id="sort-original-order" class="filter-control btn btn-default button is-checked" data-sort-by="original-order">original order</button>
+                        <button type="button" id="sort-original-order" class="sort-control btn btn-default button is-checked" data-sort-by="original-order">original order</button>
                         <label class="sr-only" for="sort-original-order">Title</label>
-                        <button type="button" id="sort-title" class="filter-control btn btn-default button" data-sort-by="title">title</button>
+                        <button type="button" id="sort-title" class="sort-control btn btn-default button" data-sort-by="title">title</button>
                         <label class="sr-only" for="sort-original-order">Author</label>
-                        <button type="button" id="sort-author" class="filter-control btn btn-default button" data-sort-by="author">author</button>
+                        <button type="button" id="sort-author" class="sort-control btn btn-default button" data-sort-by="author">author</button>
                         <label class="sr-only" for="sort-original-order">Entrycost</label>
-                        <button type="button" id="sort-entrycost" class="filter-control btn btn-default button" data-sort-by="entrycost">entrycost</button>
+                        <button type="button" id="sort-entrycost" class="sort-control btn btn-default button" data-sort-by="entrycost">entrycost</button>
                         <label class="sr-only" for="sort-original-order">Cost</label>
-                        <button type="button" id="sort-cost" class="filter-control btn btn-default button" data-sort-by="cost">cost</button>
+                        <button type="button" id="sort-cost" class="sort-control btn btn-default button" data-sort-by="cost">cost</button>
                         <label class="sr-only" for="sort-original-order">Manufacturer</label>
-                        <button type="button" id="sort-manufacturer" class="filter-control btn btn-default button" data-sort-by="manufacturer">manufacturer</button>
+                        <button type="button" id="sort-manufacturer" class="sort-control btn btn-default button" data-sort-by="manufacturer">manufacturer</button>
                         <label class="sr-only" for="sort-original-order">Mass</label>
-                        <button type="button" id="sort-mass" class="filter-control btn btn-default button" data-sort-by="mass">mass</button>
+                        <button type="button" id="sort-mass" class="sort-control btn btn-default button" data-sort-by="mass">mass</button>
                         <label class="sr-only" for="sort-original-order">Explosionpotential</label>
-                        <button type="button" id="sort-explosionpotential" class="filter-control btn btn-default button" data-sort-by="explosionpotential">explosionpotential</button>
+                        <button type="button" id="sort-explosionpotential" class="sort-control btn btn-default button" data-sort-by="explosionpotential">explosionpotential</button>
                         <label class="sr-only" for="sort-original-order">Categoryr</label>
-                        <button type="button" id="sort-category" class="btn btn-default button" data-sort-by="category">category</button>
+                        <button type="button" id="sort-category" class="sort-control btn btn-default button" data-sort-by="category">category</button>
                         <label class="sr-only" for="sort-order">Order</label>
-                        <select name="order" id="sort-order" class="filter-control sort-order form-control">
+                        <select name="order" id="sort-order" class="sort-control sort-order form-control">
                             <option selected value="ASC">Ascending</option>
                             <option value="DESC">Descending</option>
                         </select>

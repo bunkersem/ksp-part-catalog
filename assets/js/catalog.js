@@ -186,21 +186,30 @@
             return true;
         }
 
-        $('.filter-select').on('change', function () {
-            // get filter value from option value
-            var filterValue = this.value;
-            // use filterFn if matches value
-            filterValue = filterFns[filterValue] || filterValue;
-            $grid.isotope({ filter: filterValue });
-        });
+        function refreshFilters() {
+            var filterFuncs = [];
+            $('.filter-select').each(function() {
+                var filterValue = this.value;
+                // use filterFn if matches value
+                filterValue = filterFns[filterValue] || filterValue;
+                filterFuncs.push(filterValue);
+            });
+            $('button.filter-control').each(function() {
+                var filterValue = $(this).attr('data-filter');
+                // use filterFn if matches value
+                filterValue = filterFns[filterValue] || filterValue;
+                filterFuncs.push(filterValue);
+            });
+            $grid.isotope({ filter: function() {
+                var _this = this;
+                return filterFuncs.every(function(func) { return func.call(_this) });
+            }});
+        }
+
+        $('.filter-select').on('change', refreshFilters);
 
         // bind filter button click
-        $('#filters').on('click', 'button', function () {
-            var filterValue = $(this).attr('data-filter');
-            // use filterFn if matches value
-            filterValue = filterFns[filterValue] || filterValue;
-            $grid.isotope({ filter: filterValue });
-        });
+        $('#filters').on('click', 'button', refreshFilters);
 
         // bind sort button click
         $('#sorts').on('click', 'button', function () {

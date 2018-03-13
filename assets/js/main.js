@@ -29,18 +29,25 @@ var parsleyOptions = {
 //     });
 // });
 
+$.fn.hasScrollBar = function() {
+    return this.get(0).scrollHeight > this.outerHeight();
+}
+
 // scroll guard
 
 $.fn.scrollGuard2 = function () {
     return this
         .on('wheel', function (e) {
             var $this = $(this);
+            if ($this.hasScrollBar() === false) {
+                return true;
+            }
             if (e.originalEvent.deltaY < 0) {
                 /* scrolling up */
                 return ($this.scrollTop() > 0);
             } else {
                 /* scrolling down */
-                return ($this.scrollTop() + $this.innerHeight() < $this[0].scrollHeight);
+                return ($this.scrollTop() + $this.outerHeight() < $this[0].scrollHeight);
             }
         });
 };
