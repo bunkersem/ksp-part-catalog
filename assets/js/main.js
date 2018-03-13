@@ -1,10 +1,11 @@
 ---
 ---
 
-// nav sticky
-$(document).ready(function () {
-    $("#navbar").sticky({ topSpacing: 0, zIndex: 1000 });
-});
+    // nav sticky
+    $(document).ready(function () {
+        $("#navbar").sticky({ topSpacing: 0, zIndex: 1000 });
+        $('#filter-section').sticky({ topSpacing: 70, zIndex: 900 });
+    });
 
 var parsleyOptions = {
     successClass: "has-success",
@@ -28,6 +29,34 @@ var parsleyOptions = {
 //     });
 // });
 
+// scroll guard
+
+$.fn.scrollGuard2 = function () {
+    return this
+        .on('wheel', function (e) {
+            var $this = $(this);
+            if (e.originalEvent.deltaY < 0) {
+                /* scrolling up */
+                return ($this.scrollTop() > 0);
+            } else {
+                /* scrolling down */
+                return ($this.scrollTop() + $this.innerHeight() < $this[0].scrollHeight);
+            }
+        });
+};
+
+$('#filter-section').scrollGuard2();
+$('#sidebar-wrapper .sidebar-content').scrollGuard2();
+
+// scroll up
+
+var $partsGrid = $('#parts-section');
+var $scrollUp = $('#scroll-up');
+$(window).on('scroll', function (e) {
+    var below = $partsGrid.offset().top < $(window).scrollTop();
+    $scrollUp[below ? 'addClass' : 'removeClass']('up');
+    $scrollUp[below ? 'removeClass' : 'addClass']('down');
+}).trigger('scroll');
 
 // my lightbox
 

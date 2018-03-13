@@ -29,6 +29,11 @@ function encodeIntoQuery(data, discardEmptyOrNull) {
     return ret ? '?' + ret.join('&') : '';
 }
 
+function camelCaseToSentence(camelCaseNotation) {
+    var t = camelCaseNotation.replace(/([A-Z]+)/g, " $1").replace(/([A-Z][a-z])/g, " $1");
+    return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 function decodeQuery(url, discardEmpty) {
     url = (url || window.location.href).split('?')[1].split('#')[0];
     var ret = {}, url, qKVP, qParts = url.split('&');

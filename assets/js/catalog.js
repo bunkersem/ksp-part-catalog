@@ -3,8 +3,10 @@
 
 (function () {
 
+    window.app = window.app || {};
+
     var $partsGrid = $('.parts-grid');
-    var categories = [];
+    var $sidebarWrapper = $('#sidebar-wrapper');
 
     if (window.app.parts) {
         createPartsElements();
@@ -19,12 +21,13 @@
 
     function getPartInfoText(part) {
         return $('<h3 class="title text-warning">' + part.v.title + '</h3>\
-        <div class="view-more-wrapper"><a href="{{ "/parts" | absolute_url }}'+encodeIntoQuery({title: part.v.title})+'" class="view-more btn btn-danger">View More</a></div>\
-        <div class="details"><table><tr><td>Author:</td><td class="text-muted">'+part.v.author+'</td></tr>\
-        <tr><td>Category:</td><td class="text-muted">'+part.v.category+'</td></tr>\
-        <tr><td>Cost:</td><td class="text-muted">'+part.v.cost+'</td></tr>\
-        <tr><td>Mass:</td><td class="text-muted">'+part.v.mass+'</td></tr></table></div>\
-        <div>Description:</div><div class="desc text-muted"><small>'+part.v.description+'</small></div>');
+        <div class="view-more-wrapper"><button aria-control="sidebar-wrapper" class="view-more btn btn-danger">View More</button>\
+        <button class="do-compare btn btn-warning">Add</button></div>\
+        <div class="details"><table><tr><td>Author: </td><td class="text-muted">'+part.v.author+'</td></tr>\
+        <tr><td>Category: </td><td class="text-muted">'+part.v.category+'</td></tr>\
+        <tr><td>Cost: </td><td class="text-muted">'+part.v.cost+'</td></tr>\
+        <tr><td>Mass: </td><td class="text-muted">'+part.v.mass+'</td></tr></table></div>\
+        <div>Description: </div><div class="desc text-muted"><small>'+part.v.description+'</small></div>');
 
         // <tr><td><b>entryCost:</b></td><td>'+part.v.entryCost+'</td></tr>\
         // <tr><td><b>crashTolerance:</b></td><td>'+part.v.crashTolerance+'</td></tr>\
@@ -32,26 +35,73 @@
         // <tr><td><b>maxTemp:</b></td><td>'+part.v.maxTemp+'</td></tr></table>\
     }
 
+    function createGraph(part) {
+        var $htmlRet = $(document.createElement('div'));
+        $htmlRet.append($(document.createElement('h3')).text(part.name || '<Unknown>'));
+        for (var key in part.v) {
+            if (part.v.hasOwnProperty(key) && key !== 'image') {
+                $htmlRet.append(
+                    $(document.createElement('p')).text(': ' + part.v[key])
+                        .prepend($(document.createElement('b'))
+                            .text(camelCaseToSentence(key)))
+                );
+            }
+        }
+        for(var j = 0; j < (part.n || []).length; j++) {
+            $htmlRet.append(createGraph(part.n[j]).addClass('scoped-graph'));
+        }
+        return $htmlRet;
+    }
+
+    function openDetailNav(part) {
+        var $content = $sidebarWrapper.find('.sidebar-content');
+        $content.empty();
+        if (part.v.image) {
+            $content.append($(document.createElement('img')).attr('src', '{{ "/assets/img/parts/thumbs/" | absolute_url }}'
+                + escape(part.v.image) + '.png'));
+        }
+        $content.append(createGraph(part));
+        $sidebarWrapper.addClass('open');
+        if ($sidebarWrapper.hasClass('open')) {
+            $sidebarWrapper.addClass('closing');
+            setTimeout(function(){ $sidebarWrapper.removeClass('closing')}, 200);
+        }
+    }
+
+    $('#close-sidebar').on('click', function() {
+        $sidebarWrapper.removeClass('open');
+    });
+
     function createPartsElements() {
         console.log('creating parts');
         var tcats = {}
         for (var i = 0; i < window.app.parts.length; i++) {
             var part = window.app.parts[i];
-            var $item = $(document.createElement('article')).addClass('part-item');
+            var $item = $(document.createElement('article')).addClass('part-item').attr('id', 'pitem-' + i);
             var $content = $(document.createElement('div')).addClass('content');
             var $text = $(document.createElement('div')).addClass('text');
-            $text.html(getPartInfoText(part));
+            var $textContent = getPartInfoText(part);
+            (function() {
+                var p = part, index = i;
+                $textContent.find('button.view-more').on('click', function(e) {
+                    openDetailNav(p);
+                });
+                $textContent.find('button.do-compare').on('click', function(e) {
+                    var alreadyexists = window.app.compare.parts.indexOf(p) !== -1;
+                    window.app.compare[alreadyexists ? 'remove' : 'add'](p);
+                    $(this)[alreadyexists ? 'removeClass' : 'addClass']('remove');
+                    $(this).text(alreadyexists ? 'Add' : 'Remove');
+                });
+            })();
+            $text.html($textContent);
             $content.append($text);
             $item.append($content);
             $.data($item.get(0), 'i', i);
-            tcats[part.v.category] = true;
             part.v.image ? $content.css('background-image', 'url({{ "/assets/img/parts/med/" | absolute_url }}'
                 + escape(part.v.image) + '.png)')
                 : $content.addClass('img-not-found');
             $partsGrid.append($item);
         }
-        categories = Object.keys(tcats);
-        console.log(categories)
     }
 
     function initializeGrid() {
