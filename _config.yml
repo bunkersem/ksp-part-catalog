@@ -5,19 +5,17 @@ collections:
   client_collection:
     title: Pagina's inhoud
     output: false
+  parts_min:
+    title: Parts
+    output: true
   posts:
     title: Posts
     output: true
   uploads:
     title: Uploads
     output: true
-  parts_min:
-    title: Parts
-    output: true
 volledige-titel: KSP Part Catalog
 tags: KSP Part Catalog Filter Sort
-# phone: 06-12345678
-# email: effie@testmail.com
 description: KSP Part Catalog
 baseurl: 
 url: 
