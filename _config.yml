@@ -21,8 +21,8 @@ tags: KSP Part Catalog Filter Sort
 description: KSP Part Catalog
 baseurl: 
 url: 
-# facebook_username: Effie
-# twitter_username: Effie
+github_username: bunkersem
+youtube_username: 9Wereld
 markdown: kramdown
 theme: minima
 plugins: 

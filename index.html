@@ -13,8 +13,9 @@ layout: home
                     </legend>
                     <hr>
                     <div id="filters" class="button-group form-inline">
+                        <label for="category-filter"><b>Category:</b></label>
                         <select name="category" id="category-filter" class="filter-control filter-select form-control">
-                            <option selected value="categoryFilterAll">Show all</option>
+                            <option selected value="categoryFilterAll">Everything</option>
                             <option value="categoryFilterAero">Aero</option>
                             <option value="categoryFilterControl">Control</option>
                             <option value="categoryFilterPropulsion">Propulsion</option>
@@ -32,8 +33,9 @@ layout: home
                             <option value="categoryFilterCoupling">Coupling</option>
                             <option value="categoryFilterGround">Ground</option>
                         </select>
-                        <select name="category" id="category-filter" class="filter-control filter-select form-control">
-                            <option selected value="crossfeedAll">Show all</option>
+                        <label for="crossfeed-filter"><b>Fuel crossfeed:</b></label>
+                        <select name="crossfeed" id="crossfeed-filter" class="filter-control filter-select form-control">
+                            <option selected value="crossfeedAll">Everything</option>
                             <option value="crossfeedEnabled">Enabled</option>
                             <option value="crossfeedDisabled">Disabled</option>
                         </select>
